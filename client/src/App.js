@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -17,23 +17,29 @@ import ContestPage from './pages/ContestPage/ContestPage';
 import UserProfile from './pages/UserProfile/UserProfile';
 import ContestCreationPage from './pages/ContestCreation/ContestCreationPage';
 import CONSTANTS from './constants';
-import browserHistory from './browserHistory';
 import ChatContainer from './components/Chat/ChatComponents/ChatContainer/ChatContainer';
 import { requestAuthAction } from './actions/actionCreator';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 function App () {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useLayoutEffect(() => {
     const refreshToken = localStorage.getItem(CONSTANTS.REFRESH_TOKEN);
     if (refreshToken) {
-      dispatch(requestAuthAction(refreshToken));
+      const {
+        location: { pathname },
+      } = history;
+      
+      const redirect = (path = pathname) => history.push(path);
+
+      dispatch(requestAuthAction(refreshToken, redirect));
     }
   }, []);
 
   return (
-    <Router history={browserHistory}>
+    <>
       <ToastContainer
         position='top-center'
         autoClose={5000}
@@ -113,7 +119,7 @@ function App () {
         <Route component={NotFound} />
       </Switch>
       <ChatContainer />
-    </Router>
+    </>
   );
 }
 

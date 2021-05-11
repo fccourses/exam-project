@@ -24,6 +24,7 @@ const checkRefreshToken = async (req, res, next) => {
     const {
       body: { refreshToken }, // 'Bearer slkfvhnrd.dfgrftnklh.srgfvujrfh'
     } = req;
+    console.log(refreshToken)
     req.tokenData = await JwtService.verifyRefreshToken(refreshToken);
     next();
   } catch (error) {

@@ -21,6 +21,22 @@ function createAuthSaga (method) {
   };
 }
 
-export const refreshSaga = createAuthSaga(Api.auth.refresh);
+
+export function * refreshSaga (action) {
+  try {
+    const {
+      data: {
+        data: { user },
+      },
+    } = yield Api.auth.refresh(action.data);
+    controller.subscribe(user.id);
+    yield put({ type: ACTION.AUTH_ACTION_SUCCESS, user });
+    yield action.redirect();
+  } catch (err) {
+    yield put({ type: ACTION.AUTH_ACTION_ERROR, error: err.response });
+    yield action.redirect('/login');
+  }
+}
+
 export const loginSaga = createAuthSaga(Api.auth.login);
 export const registerSaga = createAuthSaga(Api.auth.signUp);

@@ -7,21 +7,13 @@ import {getUserAction, clearUserStore, headerRequest} from '../../actions/action
 
 
 class Header extends React.Component{
-  componentDidMount () {
-    if ( !this.props.user) {
-      this.props.getUser();
-    }
-  }
 
-  logOut = () => {
-    localStorage.clear();
-    this.props.clearUserStore();
-    this.props.history.replace('/login');
-  };
-
-    startContests = () => {
-        this.props.history.push('/startContest');
+    logOut = () => {
+        localStorage.clear();
+        this.props.clearUserStore();
+        this.props.history.replace('/login');
     };
+
     renderLoginButtons = () => {
         if (this.props.user) {
             return (
@@ -148,7 +140,7 @@ class Header extends React.Component{
                             </ul>
                         </div>
                         {this.props.user && this.props.user.role !== CONSTANTS.CREATOR &&
-                        <div className={styles.startContestBtn} /* onClick={this.startContests} */><Link to="/startContest">START CONTEST</Link></div>}
+                        <div className={styles.startContestBtn}><Link to="/startContest">START CONTEST</Link></div>}
                     </div>
                 </div>
             </div>
