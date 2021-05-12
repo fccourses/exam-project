@@ -9,7 +9,6 @@ import {getUserAction, clearUserStore, headerRequest} from '../../actions/action
 class Header extends React.Component{
 
     logOut = () => {
-        localStorage.clear();
         this.props.clearUserStore();
         this.props.history.replace('/login');
     };

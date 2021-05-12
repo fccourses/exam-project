@@ -59,6 +59,10 @@ module.exports.addMessage = async (req, res, next) => {
         },
       },
     });
+    controller.getNotificationController().emitNewMessage(interlocutorId,{
+      message,
+      dialogId: newConversation._id,
+    })
     res.send({
       message,
       preview: Object.assign(preview, { interlocutor: req.body.interlocutor }),

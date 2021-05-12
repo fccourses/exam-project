@@ -21,7 +21,6 @@ function createAuthSaga (method) {
   };
 }
 
-
 export function * refreshSaga (action) {
   try {
     const {
@@ -36,6 +35,11 @@ export function * refreshSaga (action) {
     yield put({ type: ACTION.AUTH_ACTION_ERROR, error: err.response });
     yield action.redirect('/login');
   }
+}
+
+export function * logoutSaga (action) {
+  yield Api.auth.logout();
+  yield put({ type: ACTION.CLEAR_STORE });
 }
 
 export const loginSaga = createAuthSaga(Api.auth.login);

@@ -61,7 +61,7 @@ export const getUserAction = (data) => {
 
 export const getDataForContest = (data) => {
     return {
-        type: ACTION.GET_DATA_FOR_CONTEST_ACTION,
+        type: ACTION.GET_DATA_FOR_CONTEST_ACTION_REQUEST,
         data: data
     }
 };
