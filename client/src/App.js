@@ -20,6 +20,7 @@ import CONSTANTS from './constants';
 import ChatContainer from './components/Chat/ChatComponents/ChatContainer/ChatContainer';
 import { requestAuthAction } from './actions/actionCreator';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import TransactionHistory from './pages/TransactionHistory';
 
 function App () {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ function App () {
       const {
         location: { pathname },
       } = history;
-      
+
       const redirect = (path = pathname) => history.push(path);
 
       dispatch(requestAuthAction(refreshToken, redirect));
@@ -53,6 +54,7 @@ function App () {
       />
       <Switch>
         <Route exact path='/' component={Home} />
+        <Route exact path='/history' component={TransactionHistory} />
         <Route exact path='/login' component={LoginPage} />
         <Route exact path='/registration' component={RegistrationPage} />
         <PrivateRoute

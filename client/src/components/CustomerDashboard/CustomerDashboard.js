@@ -7,6 +7,7 @@ import ContestBox from "../ContestBox/ContestBox";
 import styles from './CustomerDashboard.module.sass';
 import classNames from 'classnames';
 import TryAgain from '../../components/TryAgain/TryAgain';
+import { Link } from 'react-router-dom';
 
 
 class CustomerDashboard extends React.Component {
@@ -84,6 +85,7 @@ class CustomerDashboard extends React.Component {
                              [styles.filter]: CONSTANTS.CONTEST_STATUS_PENDING !== customerFilter
                          })}>Inactive contests
                     </div>
+                    <Link to='/history'>Transactions</Link>
                 </div>
                 <div className={styles.contestsContainer}>
                     {
