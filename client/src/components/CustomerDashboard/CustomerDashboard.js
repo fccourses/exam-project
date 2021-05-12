@@ -85,7 +85,6 @@ class CustomerDashboard extends React.Component {
                              [styles.filter]: CONSTANTS.CONTEST_STATUS_PENDING !== customerFilter
                          })}>Inactive contests
                     </div>
-                    <Link to='/history'>Transactions</Link>
                 </div>
                 <div className={styles.contestsContainer}>
                     {
