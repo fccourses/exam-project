@@ -29,6 +29,7 @@ class ContestPage extends React.Component {
 
     componentWillUnmount() {
         this.props.changeEditContest(false);
+        this.props.changeContestViewMode(true);
     }
 
     componentDidMount() {
@@ -127,8 +128,8 @@ class ContestPage extends React.Component {
                                     <div className={styles.buttonsContainer}>
                         <span onClick={() => changeContestViewMode(true)}
                               className={classNames(styles.btn, {[styles.activeBtn]: isBrief})}>Brief</span>
-                                        <span onClick={() => changeContestViewMode(false)}
-                                              className={classNames(styles.btn, {[styles.activeBtn]: !isBrief})}>Offer</span>
+                                        {(role === CONSTANTS.CUSTOMER && offers.length === 0) ? null : <span onClick={() => changeContestViewMode(false)}
+                                              className={classNames(styles.btn, {[styles.activeBtn]: !isBrief})}>Offer</span>}
                                     </div>
                                     {
                                         isBrief ?
